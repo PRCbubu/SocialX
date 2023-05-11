@@ -1,0 +1,2 @@
+# SocialX
+A news app
