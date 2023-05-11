@@ -2,9 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="Transparent">#00FFFFFF</color>
 
     <!--Main screen colours-->
     <color name="MainRed">#F31718</color>
     <color name="MainGrey">#BFBFBF</color>
+    <color name="MainGreyDark">#7E7E7E</color>
     <!--color name="MainRed">#F31718</color-->
 </resources>

@@ -6,6 +6,7 @@ import androidx.core.text.HtmlCompat;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.Objects;
 
@@ -25,5 +26,21 @@ public class MainActivity extends AppCompatActivity
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.MainRed)));
         getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.MainRed)); //status bar or the time bar at the top (see example image1)
         setTitle(HtmlCompat.fromHtml(formattedTitle, HtmlCompat.FROM_HTML_MODE_LEGACY));
+    }
+
+    public void logIn(View view)
+    {
+    }
+
+    public void signUp(View view)
+    {
+    }
+
+    public void GoogleLogIn(View view)
+    {
+    }
+
+    public void FacebookLogin(View view)
+    {
     }
 }
