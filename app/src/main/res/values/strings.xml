@@ -10,4 +10,16 @@
     <string name="register_now">Register Now</string>
     <string name="don_t_have_an_account">Don\'t have an Account?</string>
     <string name="name">Name</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="john_doe">John Doe</string>
+    <string name="_987654321">987654321</string>
+    <string name="checkbox">checkbox</string>
+    <string name="i_agree_with">I agree with </string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="sign_in">Sign In!</string>
+    <string name="terms_and_condition">terms and condition</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="log_in_with_google">Log in with Google</string>
+    <string name="log_in_with_facebook">Log in with Facebook</string>
+    <string name="contact_no">Contact no</string>
 </resources>

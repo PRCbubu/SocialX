@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    android:background="@color/MainGrey"
     android:orientation="vertical"
-    android:background="@color/MainGrey">
+    tools:context=".Activities.MainActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/login_signup"
@@ -32,7 +32,7 @@
             android:gravity="fill"
             android:orientation="horizontal">
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/login"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_40sdp"
@@ -44,7 +44,7 @@
                 android:textColor="@color/MainGrey"
                 android:textSize="@dimen/_13sdp" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/signup"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_40sdp"
@@ -64,11 +64,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:theme="@style/Theme.MaterialComponents"
-        android:visibility="gone"
+        android:visibility="visible"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/_20sdp"
         app:cardElevation="@dimen/_10sdp"
-        app:contentPaddingBottom="@dimen/_65sdp"
+        app:contentPaddingBottom="@dimen/_60sdp"
         app:contentPaddingTop="@dimen/_10sdp"
         app:flow_verticalBias="0.0"
         app:layout_constraintBottom_toTopOf="@+id/button"
@@ -80,10 +80,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/_5sdp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_5sdp">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/_45sdp"
@@ -93,7 +93,7 @@
                 android:textSize="@dimen/_20ssp"
                 android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -115,7 +115,7 @@
                 android:layout_marginEnd="@dimen/_30sdp"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <EditText
                     android:id="@+id/Email"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_35sdp"
@@ -126,9 +126,10 @@
                     android:paddingStart="@dimen/_5sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:textColorHint="@color/MainGrey"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_15ssp"
+                    android:textColor="@color/black"/>
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginVertical="@dimen/_5sdp"
@@ -136,7 +137,14 @@
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <ImageView
+                android:layout_width="@dimen/_255sdp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:contentDescription="@string/email"
+                android:src="@drawable/line" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -150,7 +158,7 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/Password_Layout"
+                android:id="@+id/Password_Login"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_30sdp"
@@ -158,7 +166,7 @@
                 android:layout_marginEnd="@dimen/_30sdp"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <EditText
                     android:id="@+id/Password"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_35sdp"
@@ -169,31 +177,41 @@
                     android:paddingStart="@dimen/_5sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:textColorHint="@color/MainGrey"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_15ssp"
+                    android:textColor="@color/black"/>
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginVertical="@dimen/_5sdp"
+                    android:contentDescription="@string/password"
                     android:src="@drawable/lock_clipart" />
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <ImageView
+                android:layout_width="@dimen/_255sdp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/line" />
+
+            <TextView
                 android:id="@+id/forgotPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:includeFontPadding="false"
+                android:paddingStart="@dimen/_30sdp"
                 android:paddingTop="@dimen/_1sdp"
                 android:paddingEnd="@dimen/_30sdp"
-                android:text="Forgot Password?"
+                android:text="@string/forgot_password"
                 android:textAlignment="viewEnd"
                 android:textColor="@color/MainRed"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
@@ -212,20 +230,22 @@
                 android:layout_marginHorizontal="@dimen/_100sdp"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatImageButton
+                <ImageButton
                     android:id="@+id/GoogleIcon"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_margin="@dimen/_10sdp"
                     android:clickable="true"
+                    android:contentDescription="@string/log_in_with_google"
                     android:onClick="GoogleLogIn" />
 
-                <androidx.appcompat.widget.AppCompatImageButton
+                <ImageButton
                     android:id="@+id/FaceBookIcon"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_margin="@dimen/_10sdp"
                     android:clickable="true"
+                    android:contentDescription="@string/log_in_with_facebook"
                     android:onClick="FacebookLogin" />
 
             </LinearLayout>
@@ -238,7 +258,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_2sdp"
@@ -246,7 +266,7 @@
                     android:textColor="@color/MainGreyDark"
                     android:textStyle="bold" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/RegisterNow"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -265,10 +285,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:theme="@style/Theme.MaterialComponents"
+        android:visibility="gone"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/_20sdp"
         app:cardElevation="@dimen/_10sdp"
-        app:contentPaddingBottom="@dimen/_65sdp"
+        app:contentPaddingBottom="@dimen/_35sdp"
         app:contentPaddingTop="@dimen/_10sdp"
         app:flow_verticalBias="0.0"
         app:layout_constraintBottom_toTopOf="@+id/button"
@@ -280,28 +301,28 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/_5sdp"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_5sdp">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/_45sdp"
                 android:paddingEnd="@dimen/_45sdp"
-                android:text="Create an Account"
+                android:text="@string/create_an_account"
                 android:textColor="@color/MainRed"
                 android:textSize="@dimen/_20ssp"
                 android:textStyle="bold" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:includeFontPadding="false"
                 android:paddingStart="@dimen/_35sdp"
-                android:paddingTop="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold" />
@@ -315,20 +336,21 @@
                 android:layout_marginEnd="@dimen/_30sdp"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <EditText
                     android:id="@+id/Name"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_weight="1"
-                    android:hint="John Doe"
+                    android:hint="@string/john_doe"
                     android:includeFontPadding="false"
                     android:inputType="textPersonName"
                     android:paddingStart="@dimen/_5sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:textColorHint="@color/MainGrey"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp" />
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginVertical="@dimen/_5sdp"
@@ -336,13 +358,19 @@
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <ImageView
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_1sdp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/line" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:includeFontPadding="false"
                 android:paddingStart="@dimen/_35sdp"
-                android:paddingTop="@dimen/_10sdp"
+
                 android:paddingEnd="@dimen/_10sdp"
                 android:text="@string/email"
                 android:textColor="@color/black"
@@ -358,8 +386,8 @@
                 android:layout_marginEnd="@dimen/_30sdp"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/Email"
+                <EditText
+                    android:id="@+id/Email2"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_weight="1"
@@ -369,9 +397,10 @@
                     android:paddingStart="@dimen/_5sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:textColorHint="@color/MainGrey"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_15ssp"
+                    android:textColor="@color/black"/>
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginVertical="@dimen/_5sdp"
@@ -379,56 +408,94 @@
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <ImageView
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_1sdp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/line" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:includeFontPadding="false"
                 android:paddingStart="@dimen/_35sdp"
-                android:paddingTop="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
-                android:text="@string/email"
+                android:text="@string/contact_no"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/Email_signup"
+                android:id="@+id/Contact_no_signup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_30sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_30sdp"
+                android:layout_marginBottom="@dimen/_minus6sdp"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/Email"
+                <ImageView
+                    android:id="@+id/countryFlag"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginVertical="@dimen/_5sdp" />
+
+                <TextView
+                    android:id="@+id/countryInitials"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_minus5sdp"
+                    android:includeFontPadding="false"
+                    android:paddingStart="@dimen/_2sdp"
+                    android:paddingEnd="@dimen/_2sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/countryCode"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_35sdp" />
+
+                <EditText
+                    android:id="@+id/mobileNo"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:hint="@string/johndoe_gmail_com"
+                    android:hint="@string/_987654321"
                     android:includeFontPadding="false"
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
                     android:paddingStart="@dimen/_5sdp"
-                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_5sdp"
                     android:textColorHint="@color/MainGrey"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_15ssp"
+                    android:textColor="@color/black"/>
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginVertical="@dimen/_5sdp"
-                    android:src="@drawable/email_clipart" />
+                    android:src="@drawable/call_clipart" />
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <ImageView
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/line" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:includeFontPadding="false"
                 android:paddingStart="@dimen/_35sdp"
-                android:paddingTop="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
                 android:text="@string/password"
                 android:textColor="@color/black"
@@ -436,7 +503,7 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/Password_Layout"
+                android:id="@+id/Password_Signup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_30sdp"
@@ -444,8 +511,8 @@
                 android:layout_marginEnd="@dimen/_30sdp"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/Password"
+                <EditText
+                    android:id="@+id/Password2"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_weight="1"
@@ -455,9 +522,10 @@
                     android:paddingStart="@dimen/_5sdp"
                     android:paddingEnd="@dimen/_10sdp"
                     android:textColorHint="@color/MainGrey"
-                    android:textSize="@dimen/_15ssp" />
+                    android:textSize="@dimen/_15ssp"
+                    android:textColor="@color/black"/>
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginVertical="@dimen/_5sdp"
@@ -465,20 +533,53 @@
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/forgotPassword"
+            <ImageView
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_1sdp"
+                android:src="@drawable/line"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:includeFontPadding="false"
-                android:paddingTop="@dimen/_1sdp"
-                android:paddingEnd="@dimen/_30sdp"
-                android:text="Forgot Password?"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/MainRed"
-                android:textSize="@dimen/_10ssp"
-                android:textStyle="bold" />
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
+                <CheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:background="@drawable/border"
+                    android:checked="false"
+                    android:text="@string/checkbox" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:text="@string/i_agree_with"
+                    android:textColor="@color/MainGreyDark"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/_5sdp"/>
+
+                <TextView
+                    android:id="@+id/ToC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:text="@string/terms_and_condition"
+                    android:textColor="@color/MainRed"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
 
             <LinearLayout
@@ -486,23 +587,24 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_2sdp"
-                    android:text="@string/don_t_have_an_account"
+                    android:text="@string/already_have_an_account"
                     android:textColor="@color/MainGreyDark"
                     android:textStyle="bold" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/RegisterNow"
+                <TextView
+                    android:id="@+id/SignIn_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/_2sdp"
-                    android:text="@string/register_now"
+                    android:text="@string/sign_in"
                     android:textColor="@color/MainRed"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -523,14 +625,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="1.0">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/login_signup_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
             android:background="@drawable/login_signup_button"
             android:text="@string/login"
-            android:textSize="@dimen/_12sdp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp" />
 
     </com.google.android.material.card.MaterialCardView>
 
