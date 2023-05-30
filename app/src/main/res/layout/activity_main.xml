@@ -61,7 +61,9 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/login_page"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_44sdp"
+        android:layout_marginTop="@dimen/_54sdp"
         android:orientation="vertical"
         android:theme="@style/Theme.MaterialComponents"
         android:visibility="visible"
@@ -125,9 +127,9 @@
                     android:inputType="textEmailAddress"
                     android:paddingStart="@dimen/_5sdp"
                     android:paddingEnd="@dimen/_10sdp"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/MainGrey"
-                    android:textSize="@dimen/_15ssp"
-                    android:textColor="@color/black"/>
+                    android:textSize="@dimen/_15ssp" />
 
                 <ImageView
                     android:layout_width="@dimen/_20sdp"
@@ -176,9 +178,9 @@
                     android:inputType="textPassword"
                     android:paddingStart="@dimen/_5sdp"
                     android:paddingEnd="@dimen/_10sdp"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/MainGrey"
-                    android:textSize="@dimen/_15ssp"
-                    android:textColor="@color/black"/>
+                    android:textSize="@dimen/_15ssp" />
 
                 <ImageView
                     android:layout_width="@dimen/_20sdp"
@@ -282,7 +284,9 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/Signup_page"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_44sdp"
+        android:layout_marginTop="@dimen/_54sdp"
         android:orientation="vertical"
         android:theme="@style/Theme.MaterialComponents"
         android:visibility="gone"

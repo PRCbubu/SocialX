@@ -5,12 +5,14 @@ import static com.example.socialx.Database.UserDatabase.getDatabase;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.text.HtmlCompat;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,10 +21,13 @@ import android.widget.Toast;
 
 import com.example.socialx.Database.UserDatabase;
 import com.example.socialx.R;
-import com.example.socialx.entities.UserDetails;
+import com.example.socialx.entities.UserEntities;
 import com.google.android.material.card.MaterialCardView;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity
@@ -76,39 +81,26 @@ public class MainActivity extends AppCompatActivity
         Email2 = findViewById(R.id.Email2);
         Password2 = findViewById(R.id.Password2);
 
+        //to set the colour of actionbar colour to red
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null)
         {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.MainRed)));
-
+            actionBar.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.MainRed)));
         }
-//
-        RegisterNow.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(login_page.getVisibility() != View.GONE)
-                    signUp(view);
-            }
-        });
 
-        SignIn_text.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(Signup_page.getVisibility() != View.GONE)
-                    logIn(view);
-            }
-        });
+//
+        //if(login_page.getVisibility() != View.GONE)
+        RegisterNow.setOnClickListener(this::signUp);
+
+        //if(Signup_page.getVisibility() != View.GONE)
+        SignIn_text.setOnClickListener(this::logIn);
     }
 
     public void logIn(View view)
     {
         SignUp.setBackground(null);
-        LogIn.setBackground(getResources().getDrawable(R.drawable.selected_card));
+        LogIn.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.selected_card, null));
         login_page.setVisibility(View.VISIBLE);
         Signup_page.setVisibility(View.GONE);
         login_signup_button.setText(getResources().getText(R.string.login));
@@ -117,28 +109,50 @@ public class MainActivity extends AppCompatActivity
         String email = Email.getText().toString();
         String password = Password.getText().toString();
 
-        UserDetails userDetails = new UserDetails();
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        UserDatabase userDatabase = getDatabase(this);
 
-        userDetails.setEmail(email);
-        userDetails.setPassword(password);
+        //running the room database in the background
+        service.execute(() -> {
 
-        login_signup_button.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
+
+            //Entry into the database
+            UserEntities existingUser = userDatabase.userDao().findUserByEmailOrPassword(email, password);
+
+            if (existingUser == null)
             {
-                boolean flag = verifyLogIn(userDetails);
-
-                if(!flag)
-                {
-                    Toast.makeText(getApplicationContext(), "Invalid UserName or Password", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Intent intent = new Intent(MainActivity.this, NewsFeed.class);
-                    startActivity(intent);
-                }
+                runOnUiThread(() -> Toast.makeText(this, "Email ID or Password is incorrect", Toast.LENGTH_SHORT).show());
             }
+            else
+            {
+                try
+                {
+                    service.shutdown();
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+
+                //giving a message out that the database is being used to add the details
+                //After adding the details into the database, it is redirecting to the next activity
+                runOnUiThread(() -> {
+
+
+                    if (service.isTerminated())
+                    {
+                        Intent intent = new Intent(MainActivity.this, NewsFeed.class);
+                        startActivity(intent);
+                        //finish();
+                    }
+
+
+                });
+            }
+
+
+
         });
 
     }
@@ -146,45 +160,51 @@ public class MainActivity extends AppCompatActivity
     public void signUp(View view)
     {
         LogIn.setBackground(null);
-        SignUp.setBackground(getResources().getDrawable(R.drawable.selected_card));
+        SignUp.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.selected_card, null));
         login_page.setVisibility(View.GONE);
         Signup_page.setVisibility(View.VISIBLE);
         login_signup_button.setText(getResources().getText(R.string.sign_up));
         login_signup_button.setTag(getResources().getText(R.string.sign_up));
 
-        UserDetails userDetails = new UserDetails();
+        ExecutorService service = Executors.newFixedThreadPool(10);
+        UserDatabase userDatabase = getDatabase(this);
 
-        userDetails.setName(Name.getText().toString());
-        userDetails.setNumber(mobileNo.getText().toString());
-        userDetails.setEmail(Email2.getText().toString());
-        userDetails.setPassword(Password2.getText().toString());
+        //running the room database in the background
+        login_signup_button.setOnClickListener(view1 -> service.execute(() -> {
 
-        class DatabaseTask extends AsyncTask<Void, Void, Void>
-        {
+            if (Name.getText().toString().isEmpty() || mobileNo.getText().toString().isEmpty() || Email2.getText().toString().isEmpty() || Password2.getText().toString().isEmpty()) {
+                // Show an error message to the user
+                runOnUiThread(() -> Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show());
+            } else {
+                //Entry into the database
+                UserEntities existingUser = userDatabase.userDao().findUserByEmailOrNumber(Email2.getText().toString(), mobileNo.getText().toString());
 
-            @Override
-            protected Void doInBackground(Void... voids)
-            {
-                getDatabase(getApplicationContext()).userDao().insertDetails(userDetails);
-                return null;
+                if (existingUser == null) {
+                    userDatabase.userDao().insertDetails(new UserEntities(Email2.getText().toString(), Password2.getText().toString(), Name.getText().toString(), mobileNo.getText().toString()));
+                } else {
+                    runOnUiThread(() -> Toast.makeText(this, "Email or Number already exists", Toast.LENGTH_SHORT).show());
+                }
+
+                //giving a message out that the database is being used to add the details
+                //After adding the details into the database, it is redirecting to the next activity
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Adding data...", Toast.LENGTH_SHORT).show();
+
+                    try {
+                        service.shutdown();
+                        service.awaitTermination(10, TimeUnit.SECONDS);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (service.isTerminated()) {
+                        Intent intent = new Intent(MainActivity.this, NewsFeed.class);
+                        startActivity(intent);
+                        //finish();
+                    }
+                });
             }
-
-            @Override
-            protected void onPostExecute(Void unused)
-            {
-                super.onPostExecute(unused);
-                logIn(view);
-            }
-        }
-
-        login_signup_button.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                new DatabaseTask().execute();
-            }
-        });
+        }));
     }
 
     public void GoogleLogIn(View view)
@@ -193,27 +213,5 @@ public class MainActivity extends AppCompatActivity
 
     public void FacebookLogin(View view)
     {
-    }
-
-    private boolean verifyLogIn(UserDetails userDetails)
-    {
-
-        class DatabaseTask extends AsyncTask<Void, Void, Void>
-        {
-            public static List<UserDetails> userDetails1;
-
-            @Override
-            protected Void doInBackground(Void... voids)
-            {
-                userDetails1 = UserDatabase.getDatabase(getApplicationContext()).userDao().getEmailAndPassword(userDetails.getEmail(), userDetails.getPassword());
-                return null;
-            }
-
-        }
-
-        new DatabaseTask().execute();
-        // User exists
-        // User does not exist
-        return DatabaseTask.userDetails1.contains(userDetails);
     }
 }

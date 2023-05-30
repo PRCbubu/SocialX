@@ -1,28 +1,30 @@
 package com.example.socialx.dao;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
+
 import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
+
 import androidx.room.Query;
 
-import com.example.socialx.entities.UserDetails;
+
+import com.example.socialx.entities.UserEntities;
 
 import java.util.List;
 
 @Dao
 public interface UserDao
 {
-    @Query("SELECT * FROM UserDetails ORDER BY id DESC")
-    List<UserDetails> getAllUsers();
+    @Query("select * from UserEntities")
+    List<UserEntities> getAllUsers();
 
-    @Query("SELECT * FROM UserDetails WHERE Email LIKE :Email AND password LIKE :password")
-    List<UserDetails> getEmailAndPassword(String Email, String password);
+    @Query("select * from UserEntities where Email = :email or Number = :number limit 1")
+    UserEntities findUserByEmailOrNumber(String email, String number);
+
+    @Query("select * from UserEntities where Email = :email or Password = :password limit 1")
+    UserEntities findUserByEmailOrPassword(String email, String password);
 
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertDetails(UserDetails note);
+    @Insert()
+    void insertDetails(UserEntities userEntities);
 
-    @Delete
-    void deleteNote(UserDetails note);
 }

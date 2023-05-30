@@ -7,11 +7,12 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.socialx.dao.UserDao;
-import com.example.socialx.entities.UserDetails;
+import com.example.socialx.entities.UserEntities;
 
-@Database(entities = UserDetails.class, version = 1, exportSchema = false)
+@Database(entities = {UserEntities.class}, version = 1, exportSchema = false)
 public abstract class UserDatabase extends RoomDatabase
 {
+    public static final String DB_NAME = "UserDatabase_DB";
     private static UserDatabase userDetailsDatabase;
 
     public static synchronized UserDatabase getDatabase(Context context)
@@ -21,8 +22,8 @@ public abstract class UserDatabase extends RoomDatabase
             userDetailsDatabase = Room.databaseBuilder(
                     context,
                     UserDatabase.class,
-                    "news_db"
-            ).build();
+                    DB_NAME
+            ).fallbackToDestructiveMigration().build();
         }
         return userDetailsDatabase;
     }
