@@ -5,11 +5,10 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.util.Date;
 
 
-@Entity(tableName = "News")
-public class News implements Serializable
+@Entity(tableName = "NewsEntities")
+public class NewsEntities implements Serializable
 {
     @PrimaryKey(autoGenerate = true)
     private int id;

@@ -1,23 +1,17 @@
 package com.example.socialx.dao;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
+
 import androidx.room.Query;
-import com.example.socialx.entities.News;
+
+import com.example.socialx.entities.NewsEntities;
 
 import java.util.List;
 
 @Dao
 public interface NewsDao
 {
-    @Query("SELECT * FROM News ORDER BY id DESC")
-    List<News> getAllNews();
+    @Query("SELECT * FROM NewsEntities ORDER BY id DESC")
+    List<NewsEntities> getAllNews();
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertNote(News note);
-
-    @Delete
-    void deleteNote(News note);
 }

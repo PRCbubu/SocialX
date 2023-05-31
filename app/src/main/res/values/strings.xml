@@ -22,4 +22,9 @@
     <string name="log_in_with_google">Log in with Google</string>
     <string name="log_in_with_facebook">Log in with Facebook</string>
     <string name="contact_no">Contact no</string>
+    
+    
+    //newsapi key
+    
+    <string name="api_key">d9af1acfbe8844808c7535d65490ba6e</string>
 </resources>
