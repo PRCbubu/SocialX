@@ -12,6 +12,8 @@ public interface NewsAPI_UserEndPoints
     Call<NewsAPI_Response> callHeadlines
             (
                     @Query("country") String country,
+                    @Query("category") String category,
+                    @Query("q") String query,
                     @Query("apiKey") String api_key
             );
 

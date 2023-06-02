@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.socialx.Activities.NewsFeed;
 import com.example.socialx.R;
 import com.example.socialx.model.NewsAPI_Response;
 
@@ -26,13 +25,13 @@ public class APIClient
         this.context = context;
     }
 
-    public void getNewsHeadlines(onFetchDataListener<NewsAPI_Response> listener)
+    public void getNewsHeadlines(onFetchDataListener<NewsAPI_Response> listener, String country, String category, String query)
     {
         NewsAPI_UserEndPoints userEndPoints = APIClient.getClient().create(NewsAPI_UserEndPoints.class);
-        Call<NewsAPI_Response> call = userEndPoints.callHeadlines("in", context.getString(R.string.api_key));
+        Call<NewsAPI_Response> call = userEndPoints.callHeadlines(country, category, query, context.getString(R.string.api_key));
         try
         {
-            call.enqueue(new Callback<NewsAPI_Response>()
+            call.enqueue(new Callback<>()
             {
                 @Override
                 public void onResponse(@NonNull Call<NewsAPI_Response> call, @NonNull Response<NewsAPI_Response> response)
@@ -42,6 +41,7 @@ public class APIClient
                         Toast.makeText(context, "Error!!", Toast.LENGTH_SHORT).show();
                     }
 
+                    assert response.body() != null;
                     listener.onFetchData(response.body().getArticles(), response.message());
                 }
 

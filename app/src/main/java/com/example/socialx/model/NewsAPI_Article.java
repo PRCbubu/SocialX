@@ -1,12 +1,10 @@
 package com.example.socialx.model;
 
-import android.graphics.Bitmap;
-
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class NewsAPI_User
+public class NewsAPI_Article implements Serializable
 {
     @SerializedName("source")
     private  NewsAPI_Sources sources;
@@ -16,8 +14,7 @@ public class NewsAPI_User
     private String Description;
     @SerializedName("publishedAt")
     private String PublishedAt;
-    @SerializedName("name")
-    private String SourceAt;
+
     @SerializedName("urlToImage")
     private String NewsImage;
 
@@ -49,16 +46,6 @@ public class NewsAPI_User
     public void setPublishedAt(String publishedAt)
     {
         PublishedAt = publishedAt;
-    }
-
-    public String getSourceAt()
-    {
-        return SourceAt;
-    }
-
-    public void setSourceAt(String sourceAt)
-    {
-        SourceAt = sourceAt;
     }
 
     public String getNewsImage()

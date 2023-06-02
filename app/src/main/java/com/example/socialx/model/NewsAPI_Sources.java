@@ -2,7 +2,9 @@ package com.example.socialx.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class NewsAPI_Sources
+import java.io.Serializable;
+
+public class NewsAPI_Sources implements Serializable
 {
     @SerializedName("id")
     private String id;

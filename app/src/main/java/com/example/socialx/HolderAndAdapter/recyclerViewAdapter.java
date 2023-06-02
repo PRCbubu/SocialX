@@ -8,21 +8,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.socialx.R;
-import com.example.socialx.model.NewsAPI_User;
+import com.example.socialx.model.NewsAPI_Article;
 import com.squareup.picasso.Picasso;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewHolder>
 {
-    private Context context;
-    private List<NewsAPI_User> headlines;
+    private final Context context;
+    private final List<NewsAPI_Article> headlines;
 
-    public recyclerViewAdapter(Context context, List<NewsAPI_User> headlines)
+    public recyclerViewAdapter(Context context, List<NewsAPI_Article> headlines)
     {
         this.context = context;
         this.headlines = headlines;
@@ -48,7 +46,7 @@ public class recyclerViewAdapter extends RecyclerView.Adapter<recyclerViewHolder
         }
 
         holder.PublishedAt.setText(date.format(outputFormatter));
-        holder.SourceAt.setText(headlines.get(position).getSourceAt());
+        holder.SourceAt.setText(headlines.get(position).getSources().getName());
         holder.Title.setText(headlines.get(position).getTitle());
         holder.Description.setText(headlines.get(position).getDescription());
 

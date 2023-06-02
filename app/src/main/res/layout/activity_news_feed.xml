@@ -7,15 +7,43 @@
     android:orientation="vertical"
     tools:context=".Activities.NewsFeed">
 
+    <ProgressBar
+        android:id="@+id/loadingBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:background="@color/Transparent"
+        android:indeterminateTint="@color/MainBlue"
+        android:indeterminateTintMode="screen"
+        android:visibility="visible"
+        android:indeterminate="true"
+        android:max="100"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/search"
+        android:layout_margin="@dimen/_10ssp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_5sdp"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:defaultQueryHint="Search News..."
+            app:iconifiedByDefault="false"/>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclear_main"
         android:layout_margin="@dimen/_10sdp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible"/>
 
-
-
-    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
