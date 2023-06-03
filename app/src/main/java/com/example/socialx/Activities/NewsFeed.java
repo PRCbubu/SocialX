@@ -1,5 +1,6 @@
 package com.example.socialx.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,12 +10,14 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -26,6 +29,12 @@ import com.example.socialx.REST.APIClient;
 import com.example.socialx.REST.onFetchDataListener;
 import com.example.socialx.model.NewsAPI_Response;
 import com.example.socialx.model.NewsAPI_Article;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +55,9 @@ public class NewsFeed extends AppCompatActivity
     SearchView searchView;
     CardView cardView;
     ProgressBar progressBar;
+
+    GoogleSignInOptions gso;
+    GoogleSignInClient mGoogleSignInClient;
 
     private final onFetchDataListener<NewsAPI_Response> listener = new onFetchDataListener<>()
     {
@@ -100,7 +112,7 @@ public class NewsFeed extends AppCompatActivity
         cardView = (CardView) findViewById(R.id.search);
 
         APIClient client = new APIClient(NewsFeed.this);
-        client.getNewsHeadlines(listener, "in", "general", null);
+        client.getNewsHeadlines(listener, "gb", "general", null);
 
         searchView = findViewById(R.id.search_view);
 
@@ -116,7 +128,11 @@ public class NewsFeed extends AppCompatActivity
                 countries.put(countryName, countryCode);
             }
         }
+        countries.put("Britain", "GB");
+        countries.put("America", "US");
+
         List<String> countryNames = new ArrayList<>(countries.keySet());
+        Log.i("Countries", countryNames.toString() + "\n");
 
 
         ArrayList<String> categoryNames = new ArrayList<>(Arrays.asList("business", "entertainment", "general", "health", "science", "sports", "technology"));
@@ -144,8 +160,17 @@ public class NewsFeed extends AppCompatActivity
                 }
                 else
                 {
-                    Toast.makeText(NewsFeed.this,  ""+matchRequired(categoryNames, query), Toast.LENGTH_SHORT).show();
                     category = matchRequired(categoryNames, query);
+                }
+
+                String countryToRemove = matchRequired(countryNames, query.toLowerCase());
+                String categoryToRemove = matchRequired(categoryNames, query);
+
+                if (countryToRemove != null) {
+                    query = query.replace(countryToRemove, "");
+                }
+                if (categoryToRemove != null) {
+                    query = query.replace(categoryToRemove, "");
                 }
 
                 client.getNewsHeadlines(listener, country, category, query);
@@ -157,6 +182,37 @@ public class NewsFeed extends AppCompatActivity
             public boolean onQueryTextChange(String newText)
             {
                 return false;
+            }
+        });
+
+        //Google
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
+        Button button = findViewById(R.id.SignOut);
+
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                SignOut();
+            }
+        });
+
+    }
+
+    private void SignOut()
+    {
+        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>()
+        {
+            @Override
+            public void onComplete(@NonNull Task<Void> task)
+            {
+                finish();
+                startActivity(new Intent(NewsFeed.this, MainActivity.class));
             }
         });
     }

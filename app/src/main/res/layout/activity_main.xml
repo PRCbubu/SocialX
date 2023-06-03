@@ -229,26 +229,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginHorizontal="@dimen/_100sdp"
                 android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/GoogleIcon"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
-                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10ssp"
                     android:clickable="true"
-                    android:contentDescription="@string/log_in_with_google"
-                    android:onClick="GoogleLogIn" />
+                    android:contentDescription="@string/log_in_with_google"/>
 
                 <ImageButton
                     android:id="@+id/FaceBookIcon"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
-                    android:layout_margin="@dimen/_10sdp"
+
                     android:clickable="true"
-                    android:contentDescription="@string/log_in_with_facebook"
-                    android:onClick="FacebookLogin" />
+                    android:contentDescription="@string/log_in_with_facebook"/>
 
             </LinearLayout>
 
