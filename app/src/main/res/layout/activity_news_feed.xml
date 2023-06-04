@@ -12,58 +12,49 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:background="@color/Transparent"
+        android:indeterminate="true"
         android:indeterminateTint="@color/MainBlue"
         android:indeterminateTintMode="screen"
-        android:visibility="visible"
-        android:indeterminate="true"
-        android:max="100"/>
+        android:max="100"
+        android:visibility="visible" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="@dimen/_5sdp"
-        android:visibility="gone">
+        android:visibility="gone"
+        app:cardElevation="@dimen/_5sdp">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:defaultQueryHint="Search News..."
-            app:iconifiedByDefault="false"/>
+            app:iconifiedByDefault="false" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclear_main"
-        android:layout_margin="@dimen/_10sdp"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_540sdp"
-        android:visibility="visible"/>
+        android:layout_height="@dimen/_470sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:visibility="visible" />
 
-    <androidx.cardview.widget.CardView
+    <Button
+        android:id="@+id/SignOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardElevation="@dimen/_5sdp"
-        android:visibility="visible"
-        android:layout_gravity="center">
-
-        <Button
-            android:id="@+id/SignOut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/MainBlue"
-            android:textColor="@color/white"
-            android:text="demotext"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:textSize="@dimen/_10ssp"/>
-
-    </androidx.cardview.widget.CardView>
+        android:layout_gravity="center"
+        android:background="@color/MainBlue"
+        android:text="demotext"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="bold" />
 
 
 </LinearLayout>

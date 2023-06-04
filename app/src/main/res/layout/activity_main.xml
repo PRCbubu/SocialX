@@ -235,17 +235,12 @@
                     android:id="@+id/GoogleIcon"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
-                    android:layout_marginEnd="@dimen/_10ssp"
-                    android:clickable="true"
-                    android:contentDescription="@string/log_in_with_google"/>
-
-                <ImageButton
-                    android:id="@+id/FaceBookIcon"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
 
                     android:clickable="true"
-                    android:contentDescription="@string/log_in_with_facebook"/>
+                    android:contentDescription="@string/log_in_with_google"
+                    android:scaleType="fitStart" />
+
+
 
             </LinearLayout>
 
