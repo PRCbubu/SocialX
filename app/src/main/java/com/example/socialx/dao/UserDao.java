@@ -20,8 +20,8 @@ public interface UserDao
     @Query("select * from UserEntities where Email = :email or Number = :number limit 1")
     UserEntities findUserByEmailOrNumber(String email, String number);
 
-    @Query("select * from UserEntities where Email = :email or Password = :password limit 1")
-    UserEntities findUserByEmailOrPassword(String email, String password);
+    @Query("select * from UserEntities where Email = :email and Password = :password limit 1")
+    UserEntities findUserByEmailAndPassword(String email, String password);
 
 
     @Insert()

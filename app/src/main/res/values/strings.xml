@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SocialX</string>
     <string name="login">Login</string>
-    <string name="sign_up">sign up</string>
+    <string name="sign_up">Sign up</string>
     <string name="johndoe_gmail_com">johndoe@gmail.com</string>
     <string name="signin_into_your_account">SignIn into your Account</string>
     <string name="password">Password</string>
