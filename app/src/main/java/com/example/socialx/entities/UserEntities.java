@@ -25,12 +25,16 @@ public class UserEntities implements Serializable
     @ColumnInfo(name = "Number")
     private String Number;
 
-    public UserEntities(String Email, String Password, String Name, String Number)
+    @ColumnInfo(name = "isLoggedIn")
+    private boolean check;
+
+    public UserEntities(String Email, String Password, String Name, String Number, Boolean check)
     {
         this.Email = Email;
         this.Password = Password;
         this.Name = Name;
         this.Number = Number;
+        this.check = check;
     }
 
 //    @Ignore
@@ -87,4 +91,13 @@ public class UserEntities implements Serializable
         Number = number;
     }
 
+    public boolean isCheck()
+    {
+        return check;
+    }
+
+    public void setCheck(boolean check)
+    {
+        this.check = check;
+    }
 }

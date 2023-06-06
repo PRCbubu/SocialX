@@ -102,6 +102,20 @@ public class LogIn_SignUp
         String name = Name.getText().toString();
 
         service = Executors.newCachedThreadPool();
+
+        //Pre_execute
+        int result;
+        if(Toc.isChecked())
+        {
+            if(!email.isEmpty() && !password.isEmpty() && !mobileNo.isEmpty() && !name.isEmpty())
+            {
+                result = 1;
+            }
+            else
+                result = 0;
+        }
+        else
+            result = -1;
         handler = new Handler(Looper.getMainLooper(), new Handler.Callback()
         {
             @Override
@@ -116,25 +130,15 @@ public class LogIn_SignUp
             @Override
             public void run()
             {
-                userDatabase.userDao().insertDetails(new UserEntities(email,password,name,mobileNo));
+                //onBackgroundTask
+                userDatabase.userDao().insertDetails(new UserEntities(email,password,name,mobileNo, true));
 
                 handler.post(new Runnable()
                 {
                     @Override
                     public void run()
                     {
-                        int result;
-                        if(Toc.isChecked())
-                        {
-                            if(!email.isEmpty() && !password.isEmpty() && !mobileNo.isEmpty() && !name.isEmpty())
-                            {
-                                result = 1;
-                            }
-                            else
-                                result = 0;
-                        }
-                        else
-                            result = -1;
+                        //onPostExecute
                         callBack.onResult(result);
                     }
                 });

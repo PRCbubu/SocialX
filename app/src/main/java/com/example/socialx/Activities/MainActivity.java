@@ -70,6 +70,15 @@ public class MainActivity extends AppCompatActivity
         Signup_Page = findViewById(R.id.Signup_page);
         login_signup_button = findViewById(R.id.login_signup_button);
 
+        login_signup_button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                databaseLogIn();
+            }
+        });
+
         login.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -210,16 +219,12 @@ public class MainActivity extends AppCompatActivity
 
         LogIn_SignUp logInSignUp = new LogIn_SignUp(Email, Password, this);
 
-        logInSignUp.signIn_Confirmation(new LogIn_SignUp.SignInConfirmationCallBack()
+        logInSignUp.signIn_Confirmation(isSignedIn ->
         {
-            @Override
-            public void onResult(boolean isSignedIn)
-            {
-                if(isSignedIn)
-                    navigateToSecondActivity();
-                else
-                    Toast.makeText(MainActivity.this, "Please enter your correct EmailID and Password", Toast.LENGTH_SHORT).show();
-            }
+            if(isSignedIn)
+                navigateToSecondActivity();
+            else
+                Toast.makeText(MainActivity.this, "Please enter your correct EmailID and Password", Toast.LENGTH_SHORT).show();
         });
 
     }

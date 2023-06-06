@@ -17,14 +17,15 @@ public interface UserDao
     @Query("select * from UserEntities")
     List<UserEntities> getAllUsers();
 
-    @Query("select * from UserEntities where Email = :email or Number = :number limit 1")
-    UserEntities findUserByEmailOrNumber(String email, String number);
+    @Query("Select * from UserEntities where isLoggedIn = :checklogin limit 1")
+    boolean checkLoggedIn(Boolean checklogin);
 
     @Query("select * from UserEntities where Email = :email and Password = :password limit 1")
     UserEntities findUserByEmailAndPassword(String email, String password);
 
-
     @Insert()
     void insertDetails(UserEntities userEntities);
+
+
 
 }
