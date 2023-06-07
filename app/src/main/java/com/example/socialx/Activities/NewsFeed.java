@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
@@ -199,16 +200,19 @@ public class NewsFeed extends AppCompatActivity
 
         button.setOnClickListener(new View.OnClickListener()
         {
+            @SuppressLint("CommitPrefEdits")
             @Override
             public void onClick(View view)
             {
-                SharedPreferences sharedPreferences1 = getSharedPreferences("LogIn", MODE_PRIVATE);
-                SharedPreferences sharedPreferences2 = getSharedPreferences("SignUp", MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences("LoginSignUp", MODE_PRIVATE);
+                boolean buttonClicked1 = sharedPreferences.getBoolean("LoginSignUp",false);
 
-                boolean buttonClicked2 = sharedPreferences2.getBoolean("SignUp", false);
-                boolean buttonClicked1 = sharedPreferences1.getBoolean("LogIn", false);
-                if(buttonClicked1 && buttonClicked2)
+                Toast.makeText(NewsFeed.this, ""+buttonClicked1, Toast.LENGTH_SHORT).show();
+                if(buttonClicked1)
+                {
+                    sharedPreferences.edit().putBoolean("LoginSignUp", false);
                     databaseLogOut();
+                }
                 else
                     googleSignOut();
             }

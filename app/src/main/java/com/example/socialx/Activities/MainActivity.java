@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
 
     private  ActivityResultLauncher<Intent> signInLauncher;
 
-    private Context context;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -73,17 +73,15 @@ public class MainActivity extends AppCompatActivity
         Login_Page = findViewById(R.id.Login_page);
         Signup_Page = findViewById(R.id.Signup_page);
         login_signup_button = findViewById(R.id.login_signup_button);
-        context = getApplicationContext();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("LogInSignUp", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         login_signup_button.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                SharedPreferences sharedPreferences = getSharedPreferences("LogIn", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("LogIn", true);
-                editor.apply();
                 databaseLogIn();
             }
         });
@@ -103,10 +101,6 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(View view)
                     {
-                        SharedPreferences sharedPreferences = getSharedPreferences("LogIn", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean("LogIn", true);
-                        editor.apply();
                         databaseLogIn();
                     }
                 });
@@ -130,10 +124,6 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(View view)
                     {
-                        SharedPreferences sharedPreferences = getSharedPreferences("SignUp", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean("SignUp", true);
-                        editor.apply();
                         databaseSignUp();
                     }
                 });
@@ -202,6 +192,8 @@ public class MainActivity extends AppCompatActivity
 
     private void databaseSignUp()
     {
+        editor.putBoolean("LoginSignUp", true);
+        editor.apply();
         //Logic for Signing up for the application
         EditText Name = findViewById(R.id.Name);
         EditText Email2 = findViewById(R.id.Email2);
@@ -229,6 +221,8 @@ public class MainActivity extends AppCompatActivity
 
     private void databaseLogIn()
     {
+        editor.putBoolean("LoginSignUp", true);
+        editor.apply();
         //Logic for UserName and Password login
 
         EditText Email = findViewById(R.id.Email);
@@ -289,6 +283,7 @@ public class MainActivity extends AppCompatActivity
     {
         finish();
         Intent intent = new Intent(MainActivity.this, NewsFeed.class);
+
         startActivity(intent);
     }
 
