@@ -42,6 +42,8 @@ public class LogIn_SignUp
         void onResult(int isSuccessRegister);
     }
 
+    public LogIn_SignUp() {}
+
     public LogIn_SignUp(EditText email, EditText password, Context context)
     {
         Email = email;
@@ -80,7 +82,7 @@ public class LogIn_SignUp
             public void run()
             {
                 UserEntities entities = userDatabase.userDao().findUserByEmailAndPassword(email, password);
-
+                userDatabase.userDao().updateLoggedInCheck(email, password, true);
                 handler.post(new Runnable()
                 {
                     @Override
@@ -144,7 +146,20 @@ public class LogIn_SignUp
                 });
             }
         });
+    }
 
+    public void logOut_Process()
+    {
+        ExecutorService service = Executors.newCachedThreadPool();
+        Handler handler = new Handler(Looper.getMainLooper());
 
+        service.submit(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+               userDatabase.userDao().setToLogOut();
+            }
+        });
     }
 }

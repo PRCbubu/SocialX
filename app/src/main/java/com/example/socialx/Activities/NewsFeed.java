@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 
 import android.os.Bundle;
@@ -22,11 +23,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
+import com.example.socialx.Database.UserDatabase;
 import com.example.socialx.HolderAndAdapter.recyclerViewAdapter;
 import com.example.socialx.R;
 import com.example.socialx.REST.APIClient;
 
 import com.example.socialx.REST.onFetchDataListener;
+import com.example.socialx.dao.UserDao;
 import com.example.socialx.model.NewsAPI_Response;
 import com.example.socialx.model.NewsAPI_Article;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -192,19 +195,36 @@ public class NewsFeed extends AppCompatActivity
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
         Button button = findViewById(R.id.SignOut);
+        button.setText("log Out");
 
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                SignOut();
+                SharedPreferences sharedPreferences1 = getSharedPreferences("LogIn", MODE_PRIVATE);
+                SharedPreferences sharedPreferences2 = getSharedPreferences("SignUp", MODE_PRIVATE);
+
+                boolean buttonClicked2 = sharedPreferences2.getBoolean("SignUp", false);
+                boolean buttonClicked1 = sharedPreferences1.getBoolean("LogIn", false);
+                if(buttonClicked1 && buttonClicked2)
+                    databaseLogOut();
+                else
+                    googleSignOut();
             }
         });
 
     }
 
-    private void SignOut()
+    private void databaseLogOut()
+    {
+        LogIn_SignUp logInSignUp = new LogIn_SignUp();
+        logInSignUp.logOut_Process();
+        finish();
+        startActivity(new Intent(NewsFeed.this, MainActivity.class));
+    }
+
+    private void googleSignOut()
     {
         mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>()
         {

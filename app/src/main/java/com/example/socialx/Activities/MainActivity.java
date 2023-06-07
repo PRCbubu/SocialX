@@ -12,7 +12,9 @@ import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity
 
     private  ActivityResultLauncher<Intent> signInLauncher;
 
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -69,12 +73,17 @@ public class MainActivity extends AppCompatActivity
         Login_Page = findViewById(R.id.Login_page);
         Signup_Page = findViewById(R.id.Signup_page);
         login_signup_button = findViewById(R.id.login_signup_button);
+        context = getApplicationContext();
 
         login_signup_button.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
+                SharedPreferences sharedPreferences = getSharedPreferences("LogIn", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("LogIn", true);
+                editor.apply();
                 databaseLogIn();
             }
         });
@@ -94,6 +103,10 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(View view)
                     {
+                        SharedPreferences sharedPreferences = getSharedPreferences("LogIn", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("LogIn", true);
+                        editor.apply();
                         databaseLogIn();
                     }
                 });
@@ -117,6 +130,10 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(View view)
                     {
+                        SharedPreferences sharedPreferences = getSharedPreferences("SignUp", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("SignUp", true);
+                        editor.apply();
                         databaseSignUp();
                     }
                 });
